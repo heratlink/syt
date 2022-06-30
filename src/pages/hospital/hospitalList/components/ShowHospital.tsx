@@ -73,10 +73,10 @@ export default function ShowHospital() {
         <Descriptions.Item label="医院地址" span={2}>
           {hospital.hospital.param.fullAddress}
         </Descriptions.Item>
-        <Descriptions.Item label="坐车路线" span={4}>
+        <Descriptions.Item label="坐车路线" span={4} labelStyle={{ width: 200 }}>
           {hospital.hospital.route}
         </Descriptions.Item>
-        <Descriptions.Item label="医院简介" span={4}>
+        <Descriptions.Item label="医院简介" span={4} labelStyle={{ width: 200 }}>
           {hospital.hospital.intro}
         </Descriptions.Item>
       </Descriptions>

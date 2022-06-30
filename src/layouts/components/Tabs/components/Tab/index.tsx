@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CloseOutlined } from "@ant-design/icons";
 import { Dropdown, Menu } from "antd";
@@ -56,13 +56,21 @@ function Tab({ tab, active, index, length, onClose, onCloseOthers, onCloseAll }:
     />
   );
 
+  const [isHover, setIsHover] = useState(false);
+
+  const handleHover = (isHover: boolean) => {
+    return () => {
+      setIsHover(isHover);
+    };
+  };
+
   return (
     <Dropdown overlay={menu} trigger={["contextMenu"]}>
-      <div className={`tab ${active ? "active" : ""}`}>
+      <div className={`tab ${active ? "active" : ""}`} onMouseEnter={handleHover(true)} onMouseLeave={handleHover(false)}>
         <Link className="tab-link" to={tab.path}>
           {tab.title}
         </Link>
-        {tab.closable && active && <CloseOutlined className="tab-close" onClick={() => onClose(index)} />}
+        {tab.closable && (isHover || active) && <CloseOutlined className="tab-close" onClick={() => onClose(index)} />}
       </div>
     </Dropdown>
   );

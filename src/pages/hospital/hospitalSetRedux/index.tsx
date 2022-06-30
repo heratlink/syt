@@ -53,7 +53,13 @@ export default function HospitalSet() {
         title: `您确认要删除 ${currentHosname} 数据吗？`,
         async onOk() {
           // 发送请求，删除当前行数据
-          await dispatch(removeHospitalAsync(id));
+          const res = await dispatch(removeHospitalAsync(id));
+
+          if (res.type === "hospitalSet/removeHospitalAsync/rejected") {
+            // message.error("删除医院数据失败");
+            return;
+          }
+
           message.success("删除医院数据成功");
           // 重新请求最新的数据展示
           dispatch(

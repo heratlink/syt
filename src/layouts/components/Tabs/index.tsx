@@ -1,5 +1,5 @@
 import React, { useState, useEffect, MouseEvent } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, matchPath } from "react-router-dom";
 
 import Tab from "./components/Tab";
 import routes from "@/routes";
@@ -26,7 +26,7 @@ const findTitle = (routes: XRoutes, pathname: string) => {
       const title = findTitle(route.children, pathname) as string;
       if (title) return title;
     } else {
-      if (route.path === pathname) {
+      if (matchPath(route.path as string, pathname)) {
         return (route.meta as XMeta).title as string;
       }
     }
@@ -56,7 +56,6 @@ function Tabs() {
     }
 
     const title = findTitle(routes, pathname) as string;
-
     if (!title) {
       return;
     }

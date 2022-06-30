@@ -82,6 +82,9 @@ const hospitalSetSlice = createSlice({
         state.total = total;
         state.current = current;
         state.pageSize = size;
+      })
+      .addCase(removeHospitalAsync.rejected, (err) => {
+        console.log(111, err);
       }),
 });
 

@@ -1,5 +1,6 @@
 .tab{
-  padding: 6px 16px;
+  position: relative;
+  padding: 6px 26px 6px 16px;
   margin-right: 5px;
   background-color: #fff;
   .tab-link{
@@ -7,16 +8,24 @@
   }
 }
 
+.tab-close{
+  position: absolute;
+  right: 6px;
+  top: 10px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.85);
+  transition: transform .2s;
+  margin-left: 5px;
+  &:hover{
+    transform: scale(1.1);
+  }
+}
+
 .tab.active{
   .tab-close{
     color: #1DA57A;
-    cursor: pointer;
-    transition: transform .2s;
-    margin-left: 5px;
-    &:hover{
-      transform: scale(1.1);
-    }
   }
+  
   .tab-link{
     color: #1DA57A;
   }
