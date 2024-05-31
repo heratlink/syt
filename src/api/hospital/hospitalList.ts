@@ -21,11 +21,16 @@ import {
   // ...params代表除了page\limit以外剩下的属性
   function fn({ page, limit, ...params }) {}
 */
+
+export const controller = new AbortController();
 export const reqGetHospitalList = ({ page, limit, ...params }: GetHospitalListParams) => {
   return request.get<any, GetHospitalListResponse>(`/admin/hosp/hospital/${page}/${limit}`, {
     params,
+    signal: controller.signal
   });
 };
+//这里是还用了对象的简写，实际上是params：params
+
 
 // 获取省列表数据
 // export const reqGetProvinceList = () => {

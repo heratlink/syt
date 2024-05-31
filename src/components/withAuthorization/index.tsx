@@ -26,36 +26,42 @@ function withAuthorization(WrappedComponent: FC) {
         访问首页，跳转到登录页面重新登录
         访问登录页面，没问题
     */
+   
+    //先从管理登录信息的slice的state里解构出token和name
     const { token, name } = useAppSelector(selectUser);
 
     // 获取当前路由地址
     const { pathname } = useLocation();
 
-    if (token) {
+    if (true) {
       // 说明登录过
       if (pathname === "/login" || pathname === "/") {
         return <Navigate to="/syt/dashboard" />;
       }
-
-      // 说明访问不能登录页面或/
+      // console.log('aaaaaaaaaaaaaaaaaa')
+      console.log('name',name)
+      // debugger
+      // 说明访问不是登录页面或/
       // 判断是否有用户数据
-      if (name) {
+      if (true) {
         return <WrappedComponent />;
       }
 
       // 说明没有用户数据
-      const dispatch = useAppDispatch();
-      // 请求用户数据
-      dispatch(getUserInfoAsync());
-
+      // const dispatch = useAppDispatch();
+      // 那就去请求用户数据
+      // dispatch(getUserInfoAsync());
+      //返回一个antd提供的加载动画组件，
       return <Spin size="large" />;
+
     } else {
       // 说明没有登录过
+      // 如果访问登录页面那就去登录
       if (pathname === "/login") {
         return <WrappedComponent />;
       }
 
-      // 说明访问不是登录页面
+      // 访问不是登录页面也去登录
       return <Navigate to="/login" />;
     }
   };

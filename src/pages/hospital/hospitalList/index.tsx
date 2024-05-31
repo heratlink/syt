@@ -3,6 +3,7 @@ import { Card, Form, Input, Button, Table, Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/lib/table";
 import { useNavigate } from "react-router-dom";
+import {controller} from '@api/hospital/hospitalList'
 
 import { reqGetHospitalList, reqGetCityList, reqUpdateHospitalStatus } from "@api/hospital/hospitalList";
 import { HospitalListType, HospitalItem, CityList, SearchHospitalListParams, Status } from "@api/hospital/model/hospitalListTypes";
@@ -37,12 +38,19 @@ export default function HospitalList() {
     setHostypeList(hostypeList);
   };
 
+
+
   useEffect(() => {
     getHospitalList(current, pageSize, searchParams); // 第一次搜索searchParams是空对象
     // 获取省份数据
     getProvince();
 
     getHostypeList();
+
+    return () => {
+      controller.abort()
+      console.log('取消')
+    }
   }, []);
 
   /*

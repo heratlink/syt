@@ -4,11 +4,13 @@ export interface SearchParams {
   hoscode?: string;
 }
 
-// 获取医院设置列表参数类型
+// 1.获取医院设置列表参数类型
 export interface GetHospitalSetListParams extends SearchParams {
   page: number;
   limit: number;
 }
+
+
 
 // 获取医院设置列表
 /*
@@ -41,6 +43,8 @@ export interface GetHospitalSetListParams extends SearchParams {
   }
 */
 
+
+// 2.医院列表完整数据的类型
 export interface HospitalSetItem {
   id: number;
   // createTime: "2022-06-06 12:24:22";
@@ -56,6 +60,7 @@ export interface HospitalSetItem {
   // status: 1;
 }
 
+//意思是HospitalSetList是个数组类型，里边每个成员都是对象，这些对象的类型都是HospitalSetItem接口
 export type HospitalSetList = HospitalSetItem[];
 
 export interface GetHospitalSetListResponse {
@@ -70,7 +75,10 @@ export interface GetHospitalSetListResponse {
   // "pages": number
 }
 
-// 添加医院参数类型
+
+
+
+// 3.添加医院参数类型
 export interface AddHospitalParams {
   apiUrl: string; // api基础路径
   contactsName: string; // 联系人姓名
@@ -80,7 +88,10 @@ export interface AddHospitalParams {
   // "id": 0, // id一定由服务器生成
 }
 
-// 修改医院参数类型
+
+
+
+// 4.修改医院参数类型
 export interface UpdateHospitalParams extends AddHospitalParams {
   id: number;
 }

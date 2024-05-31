@@ -13,7 +13,16 @@ import logo from "./images/logo.png";
 // https://ant.design/components/menu-cn/
 type MenuItem = Required<MenuProps>["items"][number];
 
-function getItem(label: React.ReactNode, key: React.Key, icon?: React.ReactNode, children?: MenuItem[], type?: "group"): MenuItem {
+//getItem函数，传入五个参数，返回一个对象，包含这五个参数
+//前两个必要参数，后三个可选参数
+//最后的as什么意思，没懂？？？
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  type?: "group"
+): MenuItem {
   return {
     key,
     icon,
@@ -23,8 +32,10 @@ function getItem(label: React.ReactNode, key: React.Key, icon?: React.ReactNode,
   } as MenuItem;
 }
 
+//从Layout组件中解构出Sider组件
 const { Sider } = Layout;
 
+//声明接口MenuInfo
 interface MenuInfo {
   key: string;
   keyPath: string[];
@@ -56,6 +67,8 @@ function SideBar() {
 
   const routes = findSideBarRoutes() as XRoutes;
 
+  //menuItems这个对象数组，将来要作为Menu组件的items属性的属性值
+  //.filter(Boolean)实现的效果就是把null项全删掉，原理没说
   const menuItems: MenuItem[] = routes.map((route) => {
     return getItem(
       route.meta?.title,
@@ -63,6 +76,7 @@ function SideBar() {
       route.meta?.icon,
       route.children
         ?.map((item) => {
+          //如果children里的某一个对象里有hidden属性，那这一个对象对应到map返回的新数组里就是null。如果没有hidden属性，才会正常返回getItem函数生成的对象
           if (item.hidden) return null;
           return getItem(item.meta?.title, item.path as string, item.meta?.icon);
         })

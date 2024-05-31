@@ -10,11 +10,18 @@ export interface SearchHospitalListParams {
   status?: Status; // 状态 0：未上线 1：已上线
 }
 
-// 获取医院列表参数类型
+// 获取医院列表的参数的类型
 export interface GetHospitalListParams extends SearchHospitalListParams {
   page: number;
   limit: number;
 }
+
+
+
+
+
+
+
 
 /*
   {
@@ -74,6 +81,15 @@ export interface GetHospitalListResponse {
   content: HospitalListType;
   totalElements: number;
 }
+
+
+
+
+
+
+
+
+
 
 // 省市区三级分类数据结构
 export interface CityItem {

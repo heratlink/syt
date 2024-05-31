@@ -58,6 +58,7 @@ const routes: XRoutes = [
       },
     ],
   },
+  
   {
     path: "/syt",
     element: <Layout />,
